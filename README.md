@@ -134,6 +134,9 @@ pip freeze > requirements.txt
 **Yogesh M.** – B.Tech IT, Easwari Engineering College  
 📧 yogesh2462006@gmail.com |“🔗 [LinkedIn](https://www.linkedin.com/in/yogesh2406/)”
 
+**Kishore Narayanan S R** - B.E CSE(IoT), Saveetha Engineering College
+📧 kishorenarayanan2627@gmail.com |“🔗 [LinkedIn](https://www.linkedin.com/in/kishorenarayanansr/)” | “💻 [GitHub](https://github.com/KISHORENARAYANANSR/)”
+
 > _“Visualize. Optimize. Profit.” — DashCart_
 
 ---
