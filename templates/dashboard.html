@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>E-Commerce Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-white font-sans">
+
+  <!-- Header -->
+  <div class="flex justify-between items-center px-6 py-4 bg-gray-800 shadow-lg">
+    <h1 class="text-2xl font-bold flex items-center animate-pulse">
+      <img src="https://cdn-icons-png.flaticon.com/512/1170/1170576.png" alt="Logo" class="w-8 h-8 mr-2">
+      E-Commerce Dashboard
+    </h1>
+    <a href="{{ url_for('logout') }}" class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded transition transform hover:scale-105">Logout</a>
+  </div>
+
+  <!-- Filters -->
+  <form method="GET" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 px-6 mt-4">
+    <select name="product_filter" class="p-2 rounded bg-gray-700 text-white">
+      {% for prod in products %}
+        <option value="{{ prod }}" {% if sel_prod == prod %}selected{% endif %}>{{ prod }}</option>
+      {% endfor %}
+    </select>
+
+    {% if categories %}
+    <select name="category_filter" class="p-2 rounded bg-gray-700 text-white">
+      {% for cat in categories %}
+        <option value="{{ cat }}" {% if sel_cat == cat %}selected{% endif %}>{{ cat }}</option>
+      {% endfor %}
+    </select>
+    {% endif %}
+
+    <select name="month_filter" class="p-2 rounded bg-gray-700 text-white">
+      {% for m in months_opts %}
+        <option value="{{ m }}" {% if sel_mon == m %}selected{% endif %}>{{ m }}</option>
+      {% endfor %}
+    </select>
+
+    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white py-2 rounded transition transform hover:scale-105">Apply Filters</button>
+  </form>
+
+  <!-- Charts -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-6 mt-6">
+    <div class="bg-gray-800 p-4 rounded-lg shadow-md" data-aos="fade-right">
+      <h2 class="text-lg font-semibold mb-2">Top Products by Quantity Sold</h2>
+      <canvas id="topProductsChart"></canvas>
+    </div>
+    <div class="bg-gray-800 p-4 rounded-lg shadow-md" data-aos="fade-left">
+      <h2 class="text-lg font-semibold mb-2">Monthly Revenue</h2>
+      <canvas id="monthlyRevenueChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Metrics -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-6 px-6 mt-6">
+    <div class="bg-blue-600 p-4 rounded-lg text-center transform transition hover:scale-105" data-aos="zoom-in">
+      <h3 class="text-lg font-semibold">Total Products</h3>
+      <p class="text-2xl font-bold">{{ total_products }}</p>
+    </div>
+    <div class="bg-green-600 p-4 rounded-lg text-center transform transition hover:scale-105" data-aos="zoom-in">
+      <h3 class="text-lg font-semibold">Total Orders</h3>
+      <p class="text-2xl font-bold">{{ total_orders }}</p>
+    </div>
+    <div class="bg-yellow-500 p-4 rounded-lg text-center transform transition hover:scale-105" data-aos="zoom-in">
+      <h3 class="text-lg font-semibold">Total Quantity Sold</h3>
+      <p class="text-2xl font-bold">{{ total_quantity }}</p>
+    </div>
+    <div class="bg-purple-600 p-4 rounded-lg text-center transform transition hover:scale-105" data-aos="zoom-in">
+      <h3 class="text-lg font-semibold">Total Revenue</h3>
+      <p class="text-2xl font-bold">₹{{ "%.2f"|format(total_revenue) }}</p>
+    </div>
+  </div>
+
+  <!-- Prediction -->
+  <div class="px-6 mt-6" data-aos="fade-up">
+    <div class="bg-gradient-to-r from-indigo-700 to-purple-800 p-4 rounded-lg shadow-md">
+      <h2 class="text-lg font-semibold mb-2">📈 Next 3-Month Revenue Forecast</h2>
+      <ul class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
+        {% for month, value in predicted.items() %}
+        <li class="bg-black bg-opacity-30 p-4 rounded text-center shadow">
+          <p class="text-xl font-bold">{{ month }}</p>
+          <p class="text-green-300 text-lg mt-1">₹{{ "%.2f"|format(value) }}</p>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="px-6 mt-6 pb-10" data-aos="fade-up">
+    <div class="bg-gray-800 p-4 rounded-lg shadow-lg">
+      <h2 class="text-lg font-semibold mb-4">📊 Product-wise Sales Breakdown</h2>
+      <div class="overflow-x-auto">
+        <table class="table-auto w-full text-white">
+          <thead>
+            <tr class="border-b border-gray-600">
+              <th class="py-2 text-left">Product</th>
+              <th class="py-2 text-left">Quantity Sold</th>
+              <th class="py-2 text-left">Revenue</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in product_table %}
+            <tr class="border-b border-gray-700 hover:bg-gray-700">
+              <td class="py-2">{{ row['product'] }}</td>
+              <td class="py-2">{{ row['quantity_ordered'] }}</td>
+              <td class="py-2">₹{{ "%.2f"|format(row['revenue']) }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart Scripts -->
+  <script>
+    const topLabels = {{ top_labels | tojson | safe }};
+    const topValues = {{ top_values | tojson | safe }};
+    const months = {{ months | tojson | safe }};
+    const monthValues = {{ month_values | tojson | safe }};
+
+    new Chart(document.getElementById('topProductsChart'), {
+      type: 'bar',
+      data: {
+        labels: topLabels,
+        datasets: [{
+          label: 'Units Sold',
+          data: topValues,
+          backgroundColor: ['#10B981', '#3B82F6', '#F59E0B', '#8B5CF6', '#EF4444']
+        }]
+      },
+      options: {
+        scales: {
+          y: { beginAtZero: true, ticks: { color: '#fff' }},
+          x: { ticks: { color: '#fff' }}
+        },
+        plugins: {
+          legend: { labels: { color: '#fff' }}
+        }
+      }
+    });
+
+    new Chart(document.getElementById('monthlyRevenueChart'), {
+      type: 'line',
+      data: {
+        labels: months,
+        datasets: [{
+          label: 'Revenue',
+          data: monthValues,
+          borderColor: '#3B82F6',
+          backgroundColor: 'rgba(59, 130, 246, 0.2)',
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        scales: {
+          y: { beginAtZero: true, ticks: { color: '#fff' }},
+          x: { ticks: { color: '#fff' }}
+        },
+        plugins: {
+          legend: { labels: { color: '#fff' }}
+        }
+      }
+    });
+
+    AOS.init({ duration: 1000 });
+  </script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload CSV - DashCart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1E293B, #3B0764);
+      overflow: hidden;
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .logo-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 4rem;
+      font-weight: 700;
+      color: white;
+      text-align: center;
+      margin-top: 1.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .tagline {
+      font-size: 1.1rem;
+      color: #cbd5e1;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .icon {
+      position: absolute;
+      font-size: 2rem;
+      opacity: 0.25;
+      animation: bounceFloat 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes bounceFloat {
+      0%   { transform: translateY(0) scale(1); }
+      25%  { transform: translateY(-15px) scale(1.05); }
+      50%  { transform: translateY(0) scale(1); }
+      75%  { transform: translateY(10px) scale(0.97); }
+      100% { transform: translateY(0) scale(1); }
+    }
+
+    /* Random positions + delay */
+    .icon1  { top: 8%;   left: 12%;  animation-delay: 0s; }
+    .icon2  { top: 18%;  left: 65%;  animation-delay: 1s; }
+    .icon3  { top: 30%;  left: 8%;   animation-delay: 2s; }
+    .icon4  { top: 45%;  left: 78%;  animation-delay: 3s; }
+    .icon5  { top: 60%;  left: 35%;  animation-delay: 4s; }
+    .icon6  { top: 72%;  left: 10%;  animation-delay: 5s; }
+    .icon7  { top: 82%;  left: 85%;  animation-delay: 6s; }
+    .icon8  { top: 5%;   left: 80%;  animation-delay: 7s; }
+    .icon9  { top: 26%;  left: 40%;  animation-delay: 8s; }
+    .icon10 { top: 51%;  left: 90%;  animation-delay: 9s; }
+    .icon11 { top: 68%;  left: 55%;  animation-delay: 10s; }
+    .icon12 { top: 78%;  left: 25%;  animation-delay: 11s; }
+    .icon13 { top: 88%;  left: 70%;  animation-delay: 12s; }
+    .icon14 { top: 95%;  left: 15%;  animation-delay: 13s; }
+  </style>
+</head>
+
+<body class="flex flex-col items-center justify-center min-h-screen text-white relative">
+
+  <!-- Floating + Bouncing Emojis -->
+  <div class="icon icon1">📈</div>
+  <div class="icon icon2">📊</div>
+  <div class="icon icon3">💹</div>
+  <div class="icon icon4">📉</div>
+  <div class="icon icon5">🧮</div>
+  <div class="icon icon6">📎</div>
+  <div class="icon icon7">📂</div>
+  <div class="icon icon8">📑</div>
+  <div class="icon icon9">💻</div>
+  <div class="icon icon10">🧾</div>
+  <div class="icon icon11">📋</div>
+  <div class="icon icon12">📬</div>
+  <div class="icon icon13">📦</div>
+  <div class="icon icon14">📅</div>
+
+  <!-- Branding -->
+  <h1 class="logo-title">DashCart</h1>
+  <p class="tagline">Visualize. Optimize. Profit.</p>
+
+  <!-- Upload Card -->
+  <div class="glass p-10 w-full max-w-md text-white text-center z-10">
+    <h2 class="text-3xl font-bold mb-6">📊 Upload Your Sales CSV</h2>
+    <form method="POST" enctype="multipart/form-data" class="space-y-6">
+      <div>
+        <label class="block text-sm mb-2 text-left">Select CSV File</label>
+        <input type="file" name="file" accept=".csv" required
+               class="w-full px-4 py-2 rounded-lg bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-400">
+      </div>
+      <button type="submit"
+              class="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-semibold transition transform hover:scale-105">
+        🚀 Analyze
+      </button>
+    </form>
+  </div>
+</body>
+</html>
