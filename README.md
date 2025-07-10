@@ -18,6 +18,18 @@ It lets you upload raw sales data (CSV), explores key metrics, and even predicts
 
 ---
 
+## 📸 Screenshots
+
+### 🔐 Login Page  
+![image](https://github.com/user-attachments/assets/a8ca22e9-ffc1-49ca-af4e-99a2ab9ffa00)
+
+### 📤 Upload Page  
+![image](https://github.com/user-attachments/assets/410185f6-c162-4638-9d7e-935f6a9d3a02)
+
+### 📊 Dashboard  
+![image](https://github.com/user-attachments/assets/2380e274-4a6f-445d-995a-44249d7b449c)
+![image](https://github.com/user-attachments/assets/fb46b7f9-165e-4e49-be05-4d736d35e340)
+
 ## 📂 Project Structure
 
 ```
@@ -120,7 +132,7 @@ pip freeze > requirements.txt
 ## 🙋‍♂️ Author
 
 **Yogesh M.** – B.Tech IT, Easwari Engineering College  
-📧 yogesh2462006@gmail.com | [LinkedIn]([https://linkedin.com/in/your-profile](https://www.linkedin.com/in/yogesh2406/)
+📧 yogesh2462006@gmail.com |“🔗 [LinkedIn](https://www.linkedin.com/in/yogesh2406/)”
 
 > _“Visualize. Optimize. Profit.” — DashCart_
 
