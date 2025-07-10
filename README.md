@@ -120,7 +120,7 @@ pip freeze > requirements.txt
 ## 🙋‍♂️ Author
 
 **Yogesh M.** – B.Tech IT, Easwari Engineering College  
-📧 yogesh2462006@gmail.com | [LinkedIn]([https://linkedin.com/in/your-profile](https://www.linkedin.com/in/yogesh2406/))
+📧 yogesh2462006@gmail.com | [LinkedIn]([https://linkedin.com/in/your-profile](https://www.linkedin.com/in/yogesh2406/)
 
 > _“Visualize. Optimize. Profit.” — DashCart_
 
